@@ -35,7 +35,7 @@
                                 <input wire:model='cep' type="text" class="form-control" required>
                             </div>
                             <div class="col-4 m-b30" wire:ignore>
-                                <label class="form-label required">Onde nos achou</label>
+                                <label class="form-label required">Como ficou sabendo da empresa?</label>
                                 <select wire:model='ondeNosAchou' class="form-control selectpicker"  data-live-search="true" required>
                                     <option value="Facebook">Facebook</option>
                                     <option value="Linkedin">Linkedin</option>
@@ -107,7 +107,7 @@
                                 <input wire:model='cep' type="text" class="form-control" required>
                             </div>
                             <div class="col-4 m-b30" wire:ignore>
-                                <label class="form-label required">Onde nos achou</label>
+                                <label class="form-label required">Como ficou sabendo da empresa?</label>
                                 <select wire:model='ondeNosAchou' class="form-control selectpicker"  data-live-search="true" required>
                                     <option value="Facebook">Facebook</option>
                                     <option value="Linkedin">Linkedin</option>
