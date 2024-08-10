@@ -28,7 +28,7 @@
                                     <tr>
                                         <td>
                                             <div class="form-check custom-checkbox">
-                                                <input wire:click="selectAtendimento('{{ $atendimento->id }}')" type="checkbox" class="form-check-input user-checkbox" id="customCheckBox{{ $atendimento->id }}" data-resultado-id="{{ $atendimento->id }}">
+                                                <input  wire:click="selectAtendimento('{{ $atendimento->id }}')" type="checkbox" class="form-check-input user-checkbox" id="customCheckBox{{ $atendimento->id }}" data-resultado-id="{{ $atendimento->id }}">
                                                 <label class="form-check-label" for="customCheckBox{{ $atendimento->id }}"></label>
                                             </div>
                                         </td>

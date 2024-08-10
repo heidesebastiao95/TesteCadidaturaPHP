@@ -25,4 +25,3 @@
 <script src="{{ asset('assets/js/plugins-init/chartjs-init.js') }}" data-navigate-track></script>
 <script src="{{ asset('assets/js/custom.js') }}" data-navigate-track></script>
 <script src="{{ asset('assets/js/deznav-init.js') }}" data-navigate-track></script>
-<script src="{{ asset('assets/js/scripts/crud.js') }}" data-navigate-track></script>

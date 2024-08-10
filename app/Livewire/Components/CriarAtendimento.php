@@ -80,9 +80,24 @@ class CriarAtendimento extends Component
     }
 
 
+    // Ouve evento disparado quando um checkbox é clicado (Evento disparado em livewire/components/listar-atendimentos)
     #[On('selectItem')]
     public function selectAtendimento(string $idAtendimento): void
     {
+        if($idAtendimento === $this->id) {
+
+            $this->id = null;
+            $this->nome = "";
+            $this->whatsapp = "";
+            $this->contatoAlternativo = "";
+            $this->cpf = "";
+            $this->cep = "";
+            $this->ondeNosAchou = "Facebook";
+            $this->descricao = "";
+            $this->obs = "";
+
+        } else {
+
             $this->id = $idAtendimento;
             $atendimentoParaAtualizar = Atendimento::query()->findOrFail($idAtendimento);
             $this->nome = $atendimentoParaAtualizar->nome_cliente;
@@ -93,6 +108,7 @@ class CriarAtendimento extends Component
             $this->ondeNosAchou = $atendimentoParaAtualizar->como_nos_conheceu;
             $this->descricao = $atendimentoParaAtualizar->descricao;
             $this->obs = $atendimentoParaAtualizar->obs;
+        }
     }
 
     public function render()
