@@ -37,46 +37,61 @@ class CriarAtendimento extends Component
 
     public function salvar(): void
     {
-        $this->validate();
+        try {
+            $this->validate();
 
-        $atendimentoParaSalvar = new Atendimento();
-        $atendimentoParaSalvar->nome_cliente = $this->nome;
-        $atendimentoParaSalvar->whatsapp = $this->whatsapp;
-        $atendimentoParaSalvar->contacto2 = $this->contatoAlternativo;
-        $atendimentoParaSalvar->cpf = $this->cpf;
-        $atendimentoParaSalvar->cep = $this->cep;
-        $atendimentoParaSalvar->como_nos_conheceu = $this->ondeNosAchou;
-        $atendimentoParaSalvar->descricao = $this->descricao;
-        $atendimentoParaSalvar->obs = $this->obs;
+            $atendimentoParaSalvar = new Atendimento();
+            $atendimentoParaSalvar->nome_cliente = $this->nome;
+            $atendimentoParaSalvar->whatsapp = $this->whatsapp;
+            $atendimentoParaSalvar->contacto2 = $this->contatoAlternativo;
+            $atendimentoParaSalvar->cpf = $this->cpf;
+            $atendimentoParaSalvar->cep = $this->cep;
+            $atendimentoParaSalvar->como_nos_conheceu = $this->ondeNosAchou;
+            $atendimentoParaSalvar->descricao = $this->descricao;
+            $atendimentoParaSalvar->obs = $this->obs;
+    
+            $atendimentoParaSalvar->save();
+            $this->redirect('/');
 
-        $atendimentoParaSalvar->save();
-        $this->redirect('/');
+        } catch (\Throwable $th) {
+            abort(500,'Erro ao cadastrar atendimento');
+        }
     }
 
     public function atualizar(): void
     {
-        $this->validate();
+        try {
 
-        $atendimentoParaAtualizar = Atendimento::query()->findOrFail($this->id);
-        $atendimentoParaAtualizar->nome_cliente = $this->nome;
-        $atendimentoParaAtualizar->whatsapp = $this->whatsapp;
-        $atendimentoParaAtualizar->contacto2 = $this->contatoAlternativo;
-        $atendimentoParaAtualizar->cpf = $this->cpf;
-        $atendimentoParaAtualizar->cep = $this->cep;
-        $atendimentoParaAtualizar->como_nos_conheceu = $this->ondeNosAchou;
-        $atendimentoParaAtualizar->descricao = $this->descricao;
-        $atendimentoParaAtualizar->obs = $this->obs;
+            $this->validate();
 
-        $atendimentoParaAtualizar->save();
-        $this->redirect('/');
+            $atendimentoParaAtualizar = Atendimento::query()->findOrFail($this->id);
+            $atendimentoParaAtualizar->nome_cliente = $this->nome;
+            $atendimentoParaAtualizar->whatsapp = $this->whatsapp;
+            $atendimentoParaAtualizar->contacto2 = $this->contatoAlternativo;
+            $atendimentoParaAtualizar->cpf = $this->cpf;
+            $atendimentoParaAtualizar->cep = $this->cep;
+            $atendimentoParaAtualizar->como_nos_conheceu = $this->ondeNosAchou;
+            $atendimentoParaAtualizar->descricao = $this->descricao;
+            $atendimentoParaAtualizar->obs = $this->obs;
+    
+            $atendimentoParaAtualizar->save();
+            $this->redirect('/');
+        
+        } catch (\Throwable $th) {
+            abort(500,'Erro ao atualizar atendimento');
+        }
     }
 
     public function desativar(string $idAtendimento): void
     {
-        $atendimentoParaDesativar = Atendimento::query()->findOrFail($idAtendimento);
-        $atendimentoParaDesativar->ativado = false;
-        $atendimentoParaDesativar->save();
-        $this->redirect('/');
+        try {
+            $atendimentoParaDesativar = Atendimento::query()->findOrFail($idAtendimento);
+            $atendimentoParaDesativar->ativado = false;
+            $atendimentoParaDesativar->save();
+            $this->redirect('/');
+        } catch (\Throwable $th) {
+            abort(404,'Registro não encontrado');
+        }
     }
 
 
@@ -98,16 +113,21 @@ class CriarAtendimento extends Component
 
         } else {
 
-            $this->id = $idAtendimento;
-            $atendimentoParaAtualizar = Atendimento::query()->findOrFail($idAtendimento);
-            $this->nome = $atendimentoParaAtualizar->nome_cliente;
-            $this->whatsapp = $atendimentoParaAtualizar->whatsapp;
-            $this->contatoAlternativo = $atendimentoParaAtualizar->contacto2;
-            $this->cpf = $atendimentoParaAtualizar->cpf;
-            $this->cep = $atendimentoParaAtualizar->cep;
-            $this->ondeNosAchou = $atendimentoParaAtualizar->como_nos_conheceu;
-            $this->descricao = $atendimentoParaAtualizar->descricao;
-            $this->obs = $atendimentoParaAtualizar->obs;
+            try {
+                $this->id = $idAtendimento;
+                $atendimentoParaAtualizar = Atendimento::query()->findOrFail($idAtendimento);
+                $this->nome = $atendimentoParaAtualizar->nome_cliente;
+                $this->whatsapp = $atendimentoParaAtualizar->whatsapp;
+                $this->contatoAlternativo = $atendimentoParaAtualizar->contacto2;
+                $this->cpf = $atendimentoParaAtualizar->cpf;
+                $this->cep = $atendimentoParaAtualizar->cep;
+                $this->ondeNosAchou = $atendimentoParaAtualizar->como_nos_conheceu;
+                $this->descricao = $atendimentoParaAtualizar->descricao;
+                $this->obs = $atendimentoParaAtualizar->obs;
+
+            } catch (\Throwable $th) {
+                abort(404,'Registro não encontrado');
+            }
         }
     }
 

@@ -18,11 +18,11 @@
                             </div>
                             <div class="col-4 m-b30">
                                 <label class="form-label required">Whatsapp</label>
-                                <input wire:model='whatsapp' type="text" class="form-control" required>
+                                <input wire:model='whatsapp' type="text" class="form-control telefone" required>
                             </div>
                             <div class="col-4 m-b30">
                                 <label class="form-label required">Contato Alternativo</label>
-                                <input wire:model='contatoAlternativo' type="text" class="form-control" required>
+                                <input wire:model='contatoAlternativo' type="text" class="form-control telefone" required>
                             </div>
                         </div>
                         <div class="row">
@@ -34,9 +34,9 @@
                                 <label class="form-label required">CEP</label>
                                 <input wire:model='cep' type="text" class="form-control" required>
                             </div>
-                            <div class="col-4 m-b30">
+                            <div class="col-4 m-b30" wire:ignore>
                                 <label class="form-label required">Onde nos achou</label>
-                                <select wire:model='ondeNosAchou' class="form-control selectpicker" name="tipo" id="tipo" data-live-search="true" required>
+                                <select wire:model='ondeNosAchou' class="form-control selectpicker"  data-live-search="true" required>
                                     <option value="Facebook">Facebook</option>
                                     <option value="Linkedin">Linkedin</option>
                                     <option value="Google">Google</option>
@@ -90,11 +90,11 @@
                             </div>
                             <div class="col-4 m-b30">
                                 <label class="form-label required">Whatsapp</label>
-                                <input wire:model='whatsapp' type="text" class="form-control" required>
+                                <input  wire:model='whatsapp' type="text" class="form-control telefone" required>
                             </div>
                             <div class="col-4 m-b30">
                                 <label class="form-label required">Contato Alternativo</label>
-                                <input wire:model='contatoAlternativo' type="text" class="form-control" required>
+                                <input wire:model='contatoAlternativo' type="text" class="form-control telefone" required>
                             </div>
                         </div>
                         <div class="row">
@@ -141,3 +141,31 @@
         </div>
     </div>
 </div>
+
+<script>
+    /* Máscaras Tel */
+function mascara(o,f){
+    v_obj=o
+    v_fun=f
+    setTimeout("execmascara()",1)
+}
+function execmascara(){
+    v_obj.value=v_fun(v_obj.value)
+}
+function mtel(v){
+    v=v.replace(/\D/g,""); //Remove tudo o que não é dígito
+    v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+    v=v.replace(/(\d)(\d{4})$/,"$1-$2"); //Coloca hífen entre o quarto e o quinto dígitos
+    return v;
+}
+function id( el ){
+	return document.querySelectorAll(`.${el}`);
+}
+window.onload = function(){
+	id('telefone').forEach(element => {
+        element.onkeyup = function(){
+		mascara( this, mtel );
+	}
+    });
+}
+</script>
