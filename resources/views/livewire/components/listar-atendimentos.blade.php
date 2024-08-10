@@ -28,7 +28,7 @@
                                     <tr>
                                         <td>
                                             <div class="form-check custom-checkbox">
-                                                <input  wire:click="selectAtendimento('{{ $atendimento->id }}')" type="checkbox" class="form-check-input user-checkbox" id="customCheckBox{{ $atendimento->id }}" data-resultado-id="{{ $atendimento->id }}">
+                                                <input onclick="uncheckOthers(this)"  wire:click="selectAtendimento('{{ $atendimento->id }}')" type="checkbox" class="form-check-input user-checkbox" id="customCheckBox{{ $atendimento->id }}" data-resultado-id="{{ $atendimento->id }}">
                                                 <label class="form-check-label" for="customCheckBox{{ $atendimento->id }}"></label>
                                             </div>
                                         </td>
@@ -51,3 +51,13 @@
         </div>
     </div>
 </div>
+<script>
+    function uncheckOthers(checkbox) {
+        var checkboxes = document.querySelectorAll('.user-checkbox');
+        checkboxes.forEach(function(cb) {
+            if (cb !== checkbox) {
+                cb.checked = false;
+            }
+        });
+    }
+</script>

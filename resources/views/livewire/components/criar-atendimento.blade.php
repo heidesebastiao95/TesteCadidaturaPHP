@@ -28,7 +28,7 @@
                         <div class="row">
                             <div class="col-4 m-b30">
                                 <label class="form-label required">CPF</label>
-                                <input wire:model='cpf' type="text" class="form-control" required>
+                                <input wire:model='cpf' type="text" class="form-control cpf" required>
                             </div>
                             <div class="col-4 m-b30">
                                 <label class="form-label required">CEP</label>
@@ -100,7 +100,7 @@
                         <div class="row">
                             <div class="col-4 m-b30">
                                 <label class="form-label required">CPF</label>
-                                <input wire:model='cpf' type="text" class="form-control" required>
+                                <input wire:model='cpf' type="text" class="form-control cpf" required>
                             </div>
                             <div class="col-4 m-b30">
                                 <label class="form-label required">CEP</label>
@@ -161,6 +161,13 @@ function mtel(v){
 function id( el ){
 	return document.querySelectorAll(`.${el}`);
 }
+function applyCpfMask(input) {
+    var value = input.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+    value = value.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona o primeiro ponto
+    value = value.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona o segundo ponto
+    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona o traço
+    input.value = value;
+}
 window.onload = function(){
 	id('telefone').forEach(element => {
         element.onkeyup = function(){
@@ -169,3 +176,25 @@ window.onload = function(){
     });
 }
 </script>
+
+<script>
+    function applyCpfMask(input) {
+        var value = input.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+        value = value.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona o primeiro ponto
+        value = value.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona o segundo ponto
+        value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona o traço
+        input.value = value;
+    }
+    
+    // Aplica a máscara de CPF a todos os elementos com a classe 'cpf'
+    window.onload = function() {
+        var cpfElements = document.querySelectorAll('.cpf');
+        cpfElements.forEach(function(input) {
+            input.addEventListener('input', function() {
+                applyCpfMask(input);
+            });
+        });
+    };
+
+</script>
+    
