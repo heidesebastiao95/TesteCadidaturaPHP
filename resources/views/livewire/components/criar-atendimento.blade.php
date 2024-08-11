@@ -178,7 +178,7 @@ window.onload = function(){
 
     var cpfElements = document.querySelectorAll('.cpf');
         cpfElements.forEach(function(input) {
-            input.addEventListener('input', function() {
+            input.addEventListener('keyup', function() {
                 applyCpfMask(input);
             });
         });
